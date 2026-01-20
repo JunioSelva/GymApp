@@ -38,7 +38,7 @@
 
     <div id="telaDash" class="hidden">
         <div class="header-row">
-            <h2 id="olaUsuario" style="margin:0;"></h2>
+            <h2 id="olaUsuario" class="blink-pastel" style="margin:0;"></h2>
             <button class="btn-text" onclick="location.reload()">Sair</button>
         </div>
         
@@ -93,9 +93,7 @@
 
         <div id="formNormal" class="card">
             <input type="text" id="inputNome" list="sugestoes" placeholder="Nome do Exercício">
-            <datalist id="sugestoes">
-                <option value="Supino Reto"><option value="Agachamento"><option value="Esteira"><option value="Prancha">
-            </datalist>
+            <datalist id="sugestoes"><option value="Supino Reto"><option value="Agachamento"><option value="Esteira"><option value="Prancha"></datalist>
             
             <div style="background:#111; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border:1px solid #333;">
                 <label style="margin:0;">Cardio / Tempo?</label>
@@ -105,7 +103,6 @@
             <div class="flex-row">
                 <input type="number" id="inputSeries" placeholder="Séries" style="flex:1">
                 <input type="number" id="inputReps" placeholder="Reps" style="flex:1">
-                
                 <div id="grupoTempo" class="hidden flex-row" style="flex:2; gap:5px;">
                     <input type="number" id="inputMin" placeholder="Min" style="width:50%">
                     <input type="number" id="inputSec" placeholder="Seg" style="width:50%">
@@ -134,27 +131,33 @@
     </div>
 
     <div id="telaTreino" class="hidden">
-        <div class="header-row" style="margin-bottom: 20px;">
+        <div class="header-row" style="margin-bottom: 10px;">
             <button class="btn-icon" onclick="voltarDash()">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
             </button>
             <span class="exec-badge" style="margin:0;">EM EXECUÇÃO</span>
-            <div style="width:24px"></div>
+            <button class="btn-reset-mini" onclick="resetarTreino()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"></path><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+            </button>
         </div>
-        <div id="areaTreino">Carregando...</div>
+        
+        <div id="areaTreino" style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+            Carregando...
+        </div>
     </div>
 
     <div id="painelDescanso">
         <h2 id="tituloTimer" style="letter-spacing: 4px; font-weight: 300; font-size: 1.2em; opacity: 0.7;">DESCANSO</h2>
-        <div class="timer-circle">
-            <div class="timer-text" id="timerDisplay">00:00</div>
+        <div class="neon-circle">
+            <div class="circle-content">
+                <div class="neon-number" id="timerDisplay">00:00</div>
+            </div>
         </div>
         <button class="btn-outline-neon" id="btnPularTimer" onclick="acaoBotaoTimer()">Pular</button>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-    
     <script src="script.js"></script>
 </body>
 </html>
