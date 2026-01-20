@@ -3,120 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>IronTracker Pro</title>
+    <title>GymApp</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="telaLogin">
-        <h1>🏋️‍♂️ IronTracker</h1>
-        <p class="subtitle">Seu treino, no seu tempo.</p>
-        <br>
-        <div class="card">
-            <label>Seu Nome:</label>
-            <input type="text" id="nomeUsuario" placeholder="Ex: Carlos">
-            <label>Senha PIN:</label>
-            <input type="tel" id="senhaUsuario" placeholder="****" maxlength="4" class="input-pin">
-            <button class="btn-primary" onclick="tentarLogin()">ACESSAR</button>
+    <div id="telaLogin" class="login-container">
+        <div class="login-header">
+            <img src="https://cdn-icons-png.flaticon.com/512/3203/3203613.png" alt="Logo GymApp" class="logo-img">
+            <h1 class="app-title">GymApp</h1>
+            <p class="subtitle">Map your strength</p>
         </div>
-        <p class="small-text">Primeiro acesso cria a senha.</p>
+        
+        <div class="card">
+            <label>Usuário</label>
+            <input type="text" id="nomeUsuario" placeholder="Seu nome">
+            
+            <label>PIN de Acesso</label>
+            <div class="password-wrapper">
+                <input type="password" id="senhaUsuario" placeholder="****" maxlength="4" class="input-pin">
+                <span class="eye-icon" onclick="toggleSenha()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </span>
+            </div>
+            
+            <button class="btn-neon" onclick="tentarLogin()">Entrar</button>
+        </div>
     </div>
 
     <div id="telaDash" class="hidden">
         <div class="header-row">
-            <h2 id="olaUsuario"></h2>
-            <button class="btn-outline compact" onclick="location.reload()">Sair</button>
+            <h2 id="olaUsuario" style="margin:0;"></h2>
+            <button class="btn-text" onclick="location.reload()">Sair</button>
         </div>
-        <br>
-        <label>📅 Treino de hoje:</label>
-        <select id="selectDia" onchange="carregarDia()">
-            <option value="segunda">Segunda-feira</option>
-            <option value="terca">Terça-feira</option>
-            <option value="quarta">Quarta-feira</option>
-            <option value="quinta">Quinta-feira</option>
-            <option value="sexta">Sexta-feira</option>
-            <option value="sabado">Sábado</option>
-            <option value="domingo">Domingo</option>
-        </select>
-        <hr>
-        <button class="btn-success big-btn" onclick="iniciarTreino()">💪 COMEÇAR TREINO</button>
-        <button class="btn-warning" onclick="abrirEditor()">✏️ Editar / Criar Ficha</button>
+        
+        <br><br>
+        <label style="letter-spacing: 2px;">TREINO DE HOJE</label>
+        <div class="custom-select-wrapper">
+            <select id="selectDia" onchange="carregarDia()">
+                <option value="segunda">Segunda-feira</option>
+                <option value="terca">Terça-feira</option>
+                <option value="quarta">Quarta-feira</option>
+                <option value="quinta">Quinta-feira</option>
+                <option value="sexta">Sexta-feira</option>
+                <option value="sabado">Sábado</option>
+                <option value="domingo">Domingo</option>
+            </select>
+            <span class="custom-arrow">▼</span>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <div class="action-card primary" onclick="iniciarTreino()">
+                <div class="icon-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </div>
+                <div class="text-box">
+                    <h3>Iniciar Treino</h3>
+                    <p>Começar sequência</p>
+                </div>
+            </div>
+
+            <div class="action-card" onclick="abrirEditor()">
+                <div class="icon-box" style="color:#aaa; border-color:#333;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                </div>
+                <div class="text-box">
+                    <h3>Gerenciar Ficha</h3>
+                    <p>Editar exercícios</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="telaEditor" class="hidden">
-        <h3>Editando: <span id="diaEditandoTexto" class="highlight"></span></h3>
+        <div class="header-row">
+            <h3>Editando: <span id="diaEditandoTexto" class="highlight"></span></h3>
+            <button class="btn-text" onclick="voltarDash()">Voltar</button>
+        </div>
         
         <div class="tabs-row">
-            <button id="tabNormal" class="tab active" onclick="mudarAbaEditor('normal')">Normal</button>
-            <button id="tabBiset" class="tab" onclick="mudarAbaEditor('biset')">⚡ Bi-Set</button>
+            <button id="tabNormal" class="tab active" onclick="mudarAbaEditor('normal')">Padrão</button>
+            <button id="tabBiset" class="tab" onclick="mudarAbaEditor('biset')">Bi-Set</button>
         </div>
 
-        <div id="formNormal" class="card dark-bg">
+        <div id="formNormal" class="card">
             <input type="text" id="inputNome" list="sugestoes" placeholder="Nome do Exercício">
             <datalist id="sugestoes">
-                <option value="Supino Reto"><option value="Agachamento"><option value="Esteira">
-                <option value="Prancha"><option value="Bicicleta"><option value="Rosca Direta">
+                <option value="Supino Reto"><option value="Agachamento"><option value="Esteira"><option value="Prancha">
             </datalist>
-
-            <div class="toggle-row">
-                <label>É Cardio/Tempo?</label>
-                <input type="checkbox" id="checkTipoTempo" onchange="toggleTipoInputs()">
+            
+            <div style="background:#111; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:15px; border:1px solid #333;">
+                <label style="margin:0;">Cardio / Tempo?</label>
+                <input type="checkbox" id="checkTipoTempo" onchange="toggleTipoInputs()" style="width:20px; height:20px; margin:0; accent-color:#00ff41;">
             </div>
 
             <div class="flex-row">
                 <input type="number" id="inputSeries" placeholder="Séries" style="flex:1">
                 <input type="number" id="inputReps" placeholder="Reps" style="flex:1">
+                
                 <div id="grupoTempo" class="hidden flex-row" style="flex:2; gap:5px;">
                     <input type="number" id="inputMin" placeholder="Min" style="width:50%">
                     <input type="number" id="inputSec" placeholder="Seg" style="width:50%">
                 </div>
             </div>
-            <button class="btn-primary" onclick="adicionarAoTreino('normal')">+ Adicionar Normal</button>
+            <button id="btnAddNormal" class="btn-neon small" onclick="adicionarAoTreino('normal')">Adicionar</button>
         </div>
 
-        <div id="formBiset" class="card dark-bg hidden" style="border: 1px solid #9c27b0;">
-            <h4 style="color:#ce93d8; margin:0 0 10px 0;">⚡ Configurar Bi-Set</h4>
-            
-            <label>Exercício 1:</label>
-            <input type="text" id="biNome1" placeholder="Ex: Supino">
-            <input type="number" id="biReps1" placeholder="Reps do Ex 1">
-            
-            <hr style="border-color:#555; margin:10px 0;">
-            
-            <label>Exercício 2:</label>
-            <input type="text" id="biNome2" placeholder="Ex: Flexão">
-            <input type="number" id="biReps2" placeholder="Reps do Ex 2">
-            
-            <hr style="border-color:#555; margin:10px 0;">
-            
-            <label>Séries (Para ambos):</label>
+        <div id="formBiset" class="card hidden" style="border: 1px solid #9c27b0;">
+            <h4 style="color:#ce93d8; margin:0 0 10px 0;">Configurar Bi-Set</h4>
+            <input type="text" id="biNome1" placeholder="Exercício 1">
+            <input type="number" id="biReps1" placeholder="Reps Ex 1">
+            <hr style="border-color:#333;">
+            <input type="text" id="biNome2" placeholder="Exercício 2">
+            <input type="number" id="biReps2" placeholder="Reps Ex 2">
+            <hr style="border-color:#333;">
             <input type="number" id="biSeries" placeholder="Total de Séries">
-
-            <button class="btn-primary" style="background:#9c27b0;" onclick="adicionarAoTreino('biset')">+ Adicionar Bi-Set</button>
+            <button id="btnAddBiset" class="btn-neon small purple" onclick="adicionarAoTreino('biset')">Adicionar Bi-Set</button>
         </div>
 
-        <div id="listaEditor"></div>
-        <div style="height: 100px;"></div>
+        <div id="listaEditor" style="padding-bottom: 80px;"></div>
         
         <div class="bottom-bar">
-            <button class="btn-success" onclick="salvarEVoltar()">💾 SALVAR FICHA</button>
+            <button class="btn-neon full" onclick="salvarEVoltar()">Salvar Ficha</button>
         </div>
     </div>
 
     <div id="telaTreino" class="hidden">
+        <div class="header-row" style="margin-bottom: 20px;">
+            <button class="btn-icon" onclick="voltarDash()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <span class="exec-badge" style="margin:0;">EM EXECUÇÃO</span>
+            <div style="width:24px"></div>
+        </div>
         <div id="areaTreino">Carregando...</div>
-        <button class="btn-outline" onclick="voltarDash()" style="margin-top:30px;">Cancelar</button>
     </div>
 
     <div id="painelDescanso">
-        <h2 id="tituloTimer">DESCANSO</h2>
-        <div class="timer-text" id="timerDisplay">00:00</div>
-        <p class="subtitle" id="subTimer">Respire fundo...</p>
-        <button class="btn-warning big-btn" id="btnPularTimer" onclick="acaoBotaoTimer()">Pular ⏩</button>
+        <h2 id="tituloTimer" style="letter-spacing: 4px; font-weight: 300; font-size: 1.2em; opacity: 0.7;">DESCANSO</h2>
+        <div class="timer-circle">
+            <div class="timer-text" id="timerDisplay">00:00</div>
+        </div>
+        <button class="btn-outline-neon" id="btnPularTimer" onclick="acaoBotaoTimer()">Pular</button>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    
     <script src="script.js"></script>
 </body>
 </html>
