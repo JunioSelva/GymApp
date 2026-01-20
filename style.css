@@ -1,0 +1,101 @@
+/* TEMA GERAL */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #121212;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+h1, h2, h3 { margin: 10px 0; color: #fff; }
+hr { border-color: #333; margin: 20px 0; }
+
+/* INPUTS E BOTÕES */
+input, select, button {
+    width: 100%; padding: 15px; margin: 8px 0;
+    border-radius: 8px; border: none; font-size: 16px;
+    box-sizing: border-box;
+}
+input, select { background: #2a2a2a; color: white; border: 1px solid #444; }
+input:focus { outline: 2px solid #007bff; }
+.input-pin { text-align: center; letter-spacing: 5px; font-size: 24px; }
+
+button { font-weight: bold; cursor: pointer; transition: transform 0.1s; }
+button:active { transform: scale(0.98); }
+
+.btn-primary { background: #007bff; color: white; }
+.btn-success { background: #28a745; color: white; }
+.btn-danger { background: #dc3545; color: white; }
+.btn-warning { background: #ffc107; color: #121212; }
+.btn-outline { background: transparent; border: 1px solid #666; color: #aaa; }
+.compact { width: auto; padding: 5px 15px; }
+.big-btn { padding: 20px; font-size: 18px; width: 100%; margin-bottom: 10px; }
+
+/* CARDS E LAYOUT */
+.card {
+    background: #1e1e1e; padding: 20px; margin-bottom: 15px;
+    border-radius: 12px; text-align: left;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3); border: 1px solid #333;
+}
+.card.dark-bg { background: #252525; }
+
+.flex-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+.header-row { display: flex; justify-content: space-between; align-items: center; }
+.toggle-row { 
+    display: flex; align-items: center; justify-content: space-between; 
+    margin-bottom: 10px; background: #333; padding: 10px; border-radius: 5px; 
+}
+.toggle-row input { width: 20px; height: 20px; margin: 0; cursor: pointer; }
+
+.bottom-bar {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    padding: 10px; background: #121212; box-sizing: border-box; border-top: 1px solid #333;
+}
+
+/* UTILITÁRIOS */
+.hidden { display: none !important; }
+.subtitle { color: #888; }
+.small-text { font-size: 12px; color: #555; }
+.highlight { color: #ffc107; }
+
+/* TIMER OVERLAY (Tela Cheia) */
+#painelDescanso { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.95); display: none; 
+    flex-direction: column; justify-content: center; align-items: center; z-index: 999;
+    transition: background 0.3s;
+}
+.timer-text { 
+    font-size: 6em; font-weight: 800; color: #ffc107; 
+    font-variant-numeric: tabular-nums; 
+}
+
+/* CORES ESPECÍFICAS DO TIMER */
+/* Modo Cardio (Executando) = AZUL */
+#painelDescanso.mode-cardio { background: #002a5c; }
+#painelDescanso.mode-cardio .timer-text { color: #fff; }
+#painelDescanso.mode-cardio button { background: #dc3545; color: white; }
+
+/* Modo Descanso (Esperando) = PRETO/AMARELO */
+#painelDescanso.mode-rest { background: rgba(0,0,0,0.98); }
+#painelDescanso.mode-rest .timer-text { color: #ffc107; }
+
+/* ABAS DO EDITOR */
+.tabs-row { display: flex; gap: 10px; margin-bottom: 15px; }
+.tab { background: #333; color: #aaa; border: 1px solid #444; padding: 10px; border-radius: 8px; flex: 1; }
+.tab.active { background: #007bff; color: white; border-color: #007bff; }
+
+/* ESTILO BI-SET NO LISTAGEM */
+.card.biset-card {
+    border-left: 5px solid #9c27b0; /* Roxo */
+    background: linear-gradient(90deg, #1e1e1e 0%, #29182a 100%);
+}
+.biset-label {
+    background: #9c27b0; color: white; padding: 2px 8px; 
+    border-radius: 4px; font-size: 0.7em; font-weight: bold; text-transform: uppercase;
+}
+
+/* CARTÃO DE EXECUÇÃO BI-SET */
+.card-exec-biset { border: 2px solid #9c27b0; padding: 20px; border-radius: 15px; text-align: center; }
+.divisor { height: 1px; background: #444; margin: 20px 0; }
